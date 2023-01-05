@@ -1,41 +1,35 @@
 package com.peaksoft.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "companies")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "name", unique = true, length = 40)
+    private long id;
+    @Column(unique = true, length = 40)
     private String name;
-    private int date;
-
-    public Company() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getDate() {
-        return date;
-    }
-
-    public void setDate(int date) {
-        this.date = date;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
+    private List<Employee> employees;
+    public void addEmployeeToCompany(Employee e){
+        if (employees==null){
+            employees=new ArrayList<>();
+        }employees.add(e);
+        e.setCompany(this);
     }
 }
+
+
+

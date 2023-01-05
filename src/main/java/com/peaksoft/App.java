@@ -1,10 +1,14 @@
 package com.peaksoft;
 
+import com.peaksoft.entity.Company;
+import com.peaksoft.entity.Course;
 import com.peaksoft.entity.Employee;
+import com.peaksoft.entity.Passport;
 import com.peaksoft.util.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,23 +19,48 @@ public class App
 {
     public static void main( String[] args )
     {
-        Employee employee = new Employee();
-        employee.setFirstName("Rayan");
-        employee.setLastName("Garsiya");
-        employee.setAge(24);
-//        Create(employee);
+        Employee employee = new Employee("Bektur", "Ismanaliev", 25);
+        Passport passport = new Passport();
+        passport.setINN("FGDFG5+56+");
+        employee.setPassport(passport);
+
+        Employee employee1 = new Employee("Aidai", "Mamatbekove", 18);
+        Passport passport1= new Passport();
+        passport1.setINN("dfasf564");
+        employee1.setPassport(passport1);
+
+        Company company = new Company();
+        company.setName("Google");
+        company.addEmployeeToCompany(employee);
+        company.addEmployeeToCompany(employee1);
+
+        Course course = new Course();
+        course.setName("Java");
+
+
+        Course course1 = new Course();
+        course1.setName("English");
+
+        List<Course> courses = new ArrayList<>();
+        courses.add(course);
+        courses.add(course1);
+
+        employee.setCourses(courses);
+
+        Create(company);
+
 //        System.out.println(read());
-       update( 9l  ,"Aza", "Musagaliev", 18);
+//       update( 9l  ,"Aza", "Musagaliev", 18);
         //delete(9l);
 //        read();
     }
-    public static Long Create (Employee e){
+    public static Long Create (Company c){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.save(e);
+        session.persist(c);
         session.getTransaction().commit();
         session.close();
-        return e.getId();
+        return c.getId();
     }
     public static List<Employee> read(){
         Session session = HibernateUtil.getSessionFactory().openSession();
