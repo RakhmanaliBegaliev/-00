@@ -30,6 +30,14 @@ public class Employee {
     @JoinColumn(name = "passport_id")
     private Passport passport;
 
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_of_animal")
+    private Animal animal;
+
+    @OneToMany (cascade = CascadeType.ALL)
+    @JoinColumn(name = "transport_id")
+    private Transport transport;
+
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "employees")
     List<Course>courses;
     public Employee(String firstName, String lastName, int age) {

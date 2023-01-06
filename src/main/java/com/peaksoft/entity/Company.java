@@ -23,11 +23,19 @@ public class Company {
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
     private List<Employee> employees;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "transport")
+    private List<Transport>transports;
     public void addEmployeeToCompany(Employee e){
         if (employees==null){
             employees=new ArrayList<>();
         }employees.add(e);
         e.setCompany(this);
+    }
+    public void addTransportToCompany(Transport t){
+        if (transports==null){
+            transports=new ArrayList<>();
+        }transports.add(t);
+        t.setCompany(this);
     }
 }
 

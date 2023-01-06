@@ -1,9 +1,6 @@
 package com.peaksoft.util;
 
-import com.peaksoft.entity.Company;
-import com.peaksoft.entity.Course;
-import com.peaksoft.entity.Employee;
-import com.peaksoft.entity.Passport;
+import com.peaksoft.entity.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -12,13 +9,20 @@ public class HibernateUtil {
     private static SessionFactory sessionFactory = builSessionFactory();
 
     private static SessionFactory builSessionFactory() {
-        Configuration configuration = null;
         try {
             return new Configuration().configure("hibernate.cfg.xml")
                     .addAnnotatedClass(Employee.class)
                     .addAnnotatedClass(Passport.class)
                     .addAnnotatedClass(Company.class)
                     .addAnnotatedClass(Course.class)
+                    .addAnnotatedClass(Animal.class)
+                    .addAnnotatedClass(Shop.class)
+                    .addAnnotatedClass(Smartphone.class)
+                    .addAnnotatedClass(University.class)
+                    .addAnnotatedClass(City.class)
+                    .addAnnotatedClass(Country.class)
+                    .addAnnotatedClass(Laptop.class)
+                    .addAnnotatedClass(Transport.class)
                     .buildSessionFactory();
         } catch (Exception e) {
             throw e;

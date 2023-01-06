@@ -1,9 +1,6 @@
 package com.peaksoft;
 
-import com.peaksoft.entity.Company;
-import com.peaksoft.entity.Course;
-import com.peaksoft.entity.Employee;
-import com.peaksoft.entity.Passport;
+import com.peaksoft.entity.*;
 import com.peaksoft.util.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -22,21 +19,34 @@ public class App
         Employee employee = new Employee("Bektur", "Ismanaliev", 25);
         Passport passport = new Passport();
         passport.setINN("FGDFG5+56+");
+        Animal animal = new Animal("Cat",2);
+        Transport transport = new Transport();
+        transport.setName("car");
+        employee.setTransport(transport);
+        employee.setAnimal(animal);
         employee.setPassport(passport);
 
         Employee employee1 = new Employee("Aidai", "Mamatbekove", 18);
         Passport passport1= new Passport();
         passport1.setINN("dfasf564");
+        Animal animal1 = new Animal("Dog", 5);
+        Transport transport1 = new Transport();
+        transport1.setName("Bus");
+        employee1.setTransport(transport1);
         employee1.setPassport(passport1);
+        employee1.setAnimal(animal1);
+
 
         Company company = new Company();
         company.setName("Google");
         company.addEmployeeToCompany(employee);
         company.addEmployeeToCompany(employee1);
+        Transport transport2 = new Transport();
+        transport2.setName("Bus");
+        company.addTransportToCompany(transport2);
 
         Course course = new Course();
         course.setName("Java");
-
 
         Course course1 = new Course();
         course1.setName("English");
